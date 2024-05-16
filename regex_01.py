@@ -31,4 +31,29 @@ new_string = new_string[:-1]
 # Two-step procedure
 print(new_string)
 
+#%% Version-2: Combine two for-loops into 1 from Version-1
+
+temp_word = ""
+new_string = ""
+
+for i, letter in enumerate(string):
+    if letter != " ":
+        temp_word += letter
+    elif letter == " ":
+        if "apple" in temp_word:
+            new_string += "pie "
+        else:
+            new_string += f"{temp_word} "  
+        temp_word = ""
+new_string += temp_word    
+print(f"Print strings for comparison:\n{string}\n{new_string}")
+        
 #%% Solving with regex
+
+
+
+
+
+
+
+
