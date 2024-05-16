@@ -7,46 +7,105 @@ string = 'apple orange pear pineapple durian crabapple redapple banana'
 # Result = 'pie orange pear pie durian pie pie banana'
 
 #%% Version-1: Solving without regex
+# Use type hinting
 
-# decompose the string into a list of words
-string2list = []
-temp_word = ""
-for i, letter in enumerate(string):
-    if letter != " ":
-        temp_word += letter
-    elif letter == " ":
-        string2list.append(temp_word)
-        temp_word = ""
-string2list.append(temp_word)
-            
-# action
-new_string = ""
-for idx, word in enumerate(string2list):
-    if "apple" in word:
-        new_string += "pie "
-    else:
-        new_string += f"{word} "          
-new_string = new_string[:-1]
+def replace_words_inString_twoLoops(string: str, 
+                                    word2remove: str, 
+                                    word2replace: str) -> str:
+    
+    # decompose the string into a list of words
+    string2list = []
+    temp_word = ""
+    for i, letter in enumerate(string):
+        if letter != " ":
+            temp_word += letter
+        elif letter == " ":
+            string2list.append(temp_word)
+            temp_word = ""
+    string2list.append(temp_word)
+                
+    # replace word2remove with word2replace
+    output = ""
+    for idx, word in enumerate(string2list):
+        if word2remove in word:
+            output += f"{word2replace} "
+        else:
+            output += f"{word} "          
+    output = output[:-1]
+    return output
         
 # Two-step procedure
-print(new_string)
+output = replace_words_inString_twoLoops(string, 
+                                         word2remove= "apple", 
+                                         word2replace= "pie")
+print(f"Print strings for comparison (Version-1):\n{string}\n{output}")
+
+#%% Version-1.1: Use positional and keyword arguments in function definition
+
+def replace_words_inString_twoLoops_args(*args, **kwargs):
+    
+    string = args[0]
+    word2remove = kwargs['word2remove']
+    word2replace = kwargs['word2replace']
+    
+    # decompose the string into a list of words
+    string2list = []
+    temp_word = ""
+    
+    for i, letter in enumerate(string):
+        if letter != " ":
+            temp_word += letter
+        elif letter == " ":
+            string2list.append(temp_word)
+            temp_word = ""
+    string2list.append(temp_word)
+                
+    # replace word2remove with word2replace
+    output = ""
+    for idx, word in enumerate(string2list):
+        if word2remove in word:
+            output += f"{word2replace} "
+        else:
+            output += f"{word} "          
+    output = output[:-1]
+    return output
+        
+# Two-step procedure
+output = replace_words_inString_twoLoops_args(string, 
+                                              word2remove= "apple", 
+                                              word2replace= "pie")
+print(f"Print strings for comparison (Version-1.1):\n{string}\n{output}")
 
 #%% Version-2: Combine two for-loops into 1 from Version-1
 
-temp_word = ""
-new_string = ""
+def replace_words_inString_oneLoop(string: str, 
+                                   word2remove: str, 
+                                   word2replace: str) -> str:
 
-for i, letter in enumerate(string):
-    if letter != " ":
-        temp_word += letter
-    elif letter == " ":
-        if "apple" in temp_word:
-            new_string += "pie "
-        else:
-            new_string += f"{temp_word} "  
-        temp_word = ""
-new_string += temp_word    
-print(f"Print strings for comparison:\n{string}\n{new_string}")
+    temp_word = ""
+    output = ""
+    
+    for i, letter in enumerate(string):
+        if letter != " ":
+            temp_word += letter
+        elif letter == " ":
+            if "apple" in temp_word:
+                output += "pie "
+            else:
+                output += f"{temp_word} "  
+            temp_word = ""
+    output += temp_word    
+    return output
+    
+output = replace_words_inString_oneLoop(string, 
+                                        word2remove= "apple", 
+                                        word2replace= "pie")
+print(f"Print strings for comparison (Version-2):\n{string}\n{output}")
+
+#%% Version-3: Another one-loop version
+
+output = ''
+words = string.split() # this exactly performs the first loop in Version-1
         
 #%% Solving with regex
 
