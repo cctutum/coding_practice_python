@@ -74,7 +74,7 @@ def replace_words_inString_twoLoops_args(*args, **kwargs):
 output = replace_words_inString_twoLoops_args(string, 
                                               word2remove= "apple", 
                                               word2replace= "pie")
-print(f"Print strings for comparison (Version-1.1):\n{string}\n{output}")
+print(f"\nPrint strings for comparison (Version-1.1):\n{string}\n{output}")
 
 #%% Version-2: Combine two for-loops into 1 from Version-1
 
@@ -100,13 +100,28 @@ def replace_words_inString_oneLoop(string: str,
 output = replace_words_inString_oneLoop(string, 
                                         word2remove= "apple", 
                                         word2replace= "pie")
-print(f"Print strings for comparison (Version-2):\n{string}\n{output}")
+print(f"\nPrint strings for comparison (Version-2):\n{string}\n{output}")
 
 #%% Version-3: Another one-loop version
 
-output = ''
-words = string.split() # this exactly performs the first loop in Version-1
-        
+def replace_words_inString(string: str,
+                           word2remove: str,
+                           word2replace: str) -> str:
+
+    output = ''
+    words = string.split() # this exactly performs the first loop in Version-1
+    for word in words:
+        if word.endswith(word2remove):
+            output += f"{word2replace} "
+        else:
+            output += f"{word} "
+    return output.strip()
+
+output = replace_words_inString(string, 
+                                word2remove= "apple", 
+                                word2replace= "pie")
+print(f"\nPrint strings for comparison (Version-3):\n{string}\n{output}")
+
 #%% Solving with regex
 
 
