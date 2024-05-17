@@ -124,10 +124,30 @@ print(f"\nPrint strings for comparison (Version-3):\n{string}\n{output}")
 
 #%% Solving with regex
 
+import re
 
+# check out regex pattern
+pattern = r'\b\w*apple\b'
+print(re.findall(pattern, string))
 
+# simple substitute
+print(re.sub(pattern, "pie", string))
 
+#%% Some other regex examples
 
+# extra-1
+string = 'apple orange pear'
 
+# Question: Replace all "a" and "e" with "!"
+# result = '!ppl! or!ng! p!!r'
+print(re.findall(r'[a,e]', string))
+print(re.sub(r'[a,e]', '!', string))
+
+# extra-2
+string = 'hello <i>I</i> am <b><u>Tom</u></b>'
+# we have some HTML string, we we want to get rid of all the HTML stuff
+# result = 'hello I am Tom'
+print(re.findall('<.*?>', string))
+print(re.sub('<.*?>', '', string))
 
 
