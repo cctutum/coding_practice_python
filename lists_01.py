@@ -14,19 +14,26 @@ def generate_random_integer_list(n):
     missing = a[0]
     return a[1:], missing
 
-def find_missing_int(x):
+def find_missing_int_naive(x):
     # Find the missing integer in a given list (sorted() is used)
     y = sorted(x)
     for i in range(len(y)-1):
         if y[i+1] - y[i] > 1:
             return y[i]+1
-
+        
+def find_missing_int_naive2(lst):
+    missing_int_set = set(lst)
+    int_set = {i for i in range(1, len(lst)+2)}
+    missing_int = int_set.difference(missing_int_set)
+    iterator = iter(missing_int)
+    return next(iterator) # list(missing_int)[0]
 
 if __name__ == "__main__":
     
     n = 10
     given_list, missing = generate_random_integer_list(n)
     print(given_list, missing)
-    print(find_missing_int(given_list))
+    print(find_missing_int_naive(given_list))
+    print(find_missing_int_naive2(given_list))
     
     
