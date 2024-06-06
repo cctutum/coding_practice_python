@@ -14,26 +14,46 @@ def generate_random_integer_list(n):
     missing = a[0]
     return a[1:], missing
 
-def find_missing_int_naive(x):
+def find_missing_int_sorted(x):
     # Find the missing integer in a given list (sorted() is used)
     y = sorted(x)
+    if y[0] != 1:
+        return 1
     for i in range(len(y)-1):
         if y[i+1] - y[i] > 1:
             return y[i]+1
+    return len(x)+1
         
-def find_missing_int_naive2(lst):
-    missing_int_set = set(lst)
-    int_set = {i for i in range(1, len(lst)+2)}
+def find_missing_int_naive(lst):
+    # SPace complexity is higher
+    missing_int_set = set(lst) # space complexity O(n)
+    int_set = {i for i in range(1, len(lst)+2)} # space complexity O(n)
     missing_int = int_set.difference(missing_int_set)
     iterator = iter(missing_int)
     return next(iterator) # list(missing_int)[0]
 
+def find_missing_int(lst):
+    missing_sum = sum(lst)
+    int_sum = sum([i for i in range(len(lst)+2)])
+    return int_sum - missing_sum
+
+
 if __name__ == "__main__":
     
-    n = 10
+    n = 10 # it starts getting slover at 1000000
     given_list, missing = generate_random_integer_list(n)
+    
+    print("\nGenerated list and the missing value:")
     print(given_list, missing)
+    
+    print("\nFirst method: Using sorted()")
+    print(find_missing_int_sorted(given_list))
+    
+    print("\nSecond method (naive): Using set.difference() and iterator")
     print(find_missing_int_naive(given_list))
-    print(find_missing_int_naive2(given_list))
     
+    print("\nThird method: Usin sum()")
+    print(find_missing_int(given_list))
     
+    assert find_missing_int_sorted([9, 6, 8, 2, 4, 7, 3, 5]) == 1
+    assert find_missing_int_sorted([7, 3, 8, 6, 4, 5, 2, 1]) == 9
