@@ -35,14 +35,38 @@ print(Replace_Vowels_With_Numbers("Replace vowels with numbers based on their po
 # Determine if a string has the same number of 'x' and 'o' characters
 
 def compare_Numbers(string):
-    xs, os = 0, 0
-    for char in string:
-        if char.lower() == 'x':
-            xs += 1
-        elif char.lower() == 'o':
-            os += 1
-    return xs, os
+    x_count = string.count('x')
+    o_count = string.count('o')
+    return x_count == o_count
 
 print(compare_Numbers("RXxloxe vOwXls with nuxXxrs bxsOd ox thoir position in the olohxOxOX"))
 
 #%%
+
+# Check if a string only contains digits and spaces
+
+def CheckDigitsSpaces(string):
+    digit_count = 0
+    space_count = 0
+    for char in string:
+        if char.isdigit():
+            digit_count += 1
+        elif char == ' ':
+            space_count += 1
+    return len(string) == digit_count + space_count
+
+print(CheckDigitsSpaces("Replace vowels with numbers based on their position in the alphabet"))
+
+#%%
+
+# Given a time in 12-hour AM/PM format, convert it to military (24-hour) time
+
+
+
+
+
+
+
+
+
+
