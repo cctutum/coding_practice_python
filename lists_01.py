@@ -37,7 +37,7 @@ def find_missing_int(lst):
     complete_sum = sum([i for i in range(len(lst)+2)])
     return complete_sum - missing_sum
 
-def find_missing_int2(lst):
+def find_missing_formula(lst):
     missing_sum = sum(lst)
     complete_sum = (len(lst)+1) * (len(lst)+2) / 2 # formula= n*(n+1)/2
     return int(complete_sum - missing_sum)
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     print(find_missing_int(given_list))
     
     print("\nFourth method: Using summation formula")
-    print(find_missing_int2(given_list))
+    print(find_missing_formula(given_list))
     
     assert find_missing_int_sorted([9, 6, 8, 2, 4, 7, 3, 5]) == 1
     assert find_missing_int_sorted([7, 3, 8, 6, 4, 5, 2, 1]) == 9
