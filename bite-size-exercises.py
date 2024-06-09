@@ -61,12 +61,44 @@ print(CheckDigitsSpaces("Replace vowels with numbers based on their position in 
 
 # Given a time in 12-hour AM/PM format, convert it to military (24-hour) time
 
+def TimeConversion(string):
+    am_pm = string[-2:]
+    hour, minute, second = map(int, string[:-2].split(':'))
+    if am_pm == 'PM' and hour != 12:
+        hour += 12
+    elif am_pm == 'AM' and hour == 12:
+        hour = 0
+    return f'{hour:02d}:{minute:02d}:{second:02d}'
+    
+print(TimeConversion("12:34:56 AM"))
 
+#%%
 
+# Check if a given string is a palindrome (reads the same forward and backward)
 
+def isPalindrome(string):
+    return string == string[::-1]
 
+print(isPalindrome("apfggfpa"))
 
+#%%
 
+# Find the length of the longest increasing subsequence in a given list of integers
+
+def LongestIncreasingSubsequence(arr):
+    if not arr:
+        return 0
+    n = len(arr)
+    dp = [1] * n
+    for i in range(1, n):
+        for j in range(i):
+            if arr[i] > arr[j]:
+                dp[i] = max(dp[i], dp[j] + 1)
+    return max(dp)
+
+print(LongestIncreasingSubsequence([4, 5, 1, 2, 3, 6, 5, 7, 9, 13, 26]))
+
+#%%
 
 
 
