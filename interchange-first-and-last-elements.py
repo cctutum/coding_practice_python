@@ -28,5 +28,6 @@ functions = [swap_first_last,
              swap_first_last_v3]
 
 
+lst = list(range(7))
 for f in functions:
-    print(f(list(range(7))))
+    print(f(lst))
